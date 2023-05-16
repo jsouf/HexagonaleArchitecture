@@ -11,12 +11,10 @@ Couche hexagone : expose des ports primaires/secondes, DomainModel, Service (cou
 
 ## Infrastructure
 
-Couche Providers/Persistence : accès aux données, interface APIS, ...
+Couche Providers/Persistence : accès aux données, interface APIS, ... 
 
+##
 
-
-
-
-Implémentation de l'article ci-dessous avec quelques modifications pour identifier les termes utilisés dans chaque couche
+Basé sur l'article ci-dessous
 
 __article :__ https://cdiese.fr/larchitecture-hexagonale-en-5-min/
