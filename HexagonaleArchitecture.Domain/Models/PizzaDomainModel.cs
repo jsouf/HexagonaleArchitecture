@@ -16,5 +16,10 @@ namespace HexagonaleArchitecture.Domain.Models
 
             return (int)Math.Ceiling(pizzaCount);
         }
+
+        public bool IsSalable()
+        {
+            return Size >= 30;
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace HexagonaleArchitecture.Domain.Models
         public int Size { get; set; }
 
         int CalculatePersonCount(uint personCount);
+        bool IsSalable();
     }
 }

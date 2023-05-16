@@ -1,11 +1,10 @@
 ﻿using HexagonaleArchitecture.Domain.Enums;
 
-namespace HexagonaleArchitecture.Infrastructure.Models
+namespace HexagonaleArchitecture.Domain.DTOs
 {
-    public class PizzaInfrastructureModel
+    public interface IPizzaLightDto
     {
         public PizzaKind PizzaKind { get; set; }
         public int AverageSliceCount { get; set; }
-        public int Size { get; set; }
     }
 }

@@ -20,9 +20,10 @@ namespace HexagonaleArchitecture.Infrastructure.Adapters
         /// </summary>
         private readonly List<PizzaInfrastructureModel> pizzaContext = new()
         {
-            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Regina, AverageSliceCount = 6},
-            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Pepperoni, AverageSliceCount = 4},
-            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Vegetarian, AverageSliceCount = 7},
+            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Regina, AverageSliceCount = 6, Size = 40 },
+            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Pepperoni, AverageSliceCount = 4, Size = 30 },
+            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Vegetarian, AverageSliceCount = 7, Size = 35 },
+            new PizzaInfrastructureModel { PizzaKind = PizzaKind.Regina, AverageSliceCount = 5, Size = 20 }
         };
 
         public IEnumerable<IPizzaDto> GetAll()
@@ -33,7 +34,8 @@ namespace HexagonaleArchitecture.Infrastructure.Adapters
             var pizzas = pizzaContext.Select(pizza => new PizzaDto
             {
                 PizzaKind = pizza.PizzaKind,
-                AverageSliceCount = pizza.AverageSliceCount
+                AverageSliceCount = pizza.AverageSliceCount,
+                Size = pizza.Size
             });
 
             return pizzas;

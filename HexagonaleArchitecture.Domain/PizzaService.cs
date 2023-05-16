@@ -29,5 +29,31 @@ namespace HexagonaleArchitecture.Domain
 
             return pizzaDomainModel.CalculatePersonCount(personCount);
         }
+
+        public IList<IPizzaLightDto> GetPizzas()
+        {
+            IEnumerable<IPizzaDto> pizzasDtos = _pizzaSecondaryPort.GetAll();
+
+            IList<IPizzaDomainModel> pizzasDomainModels = pizzasDtos
+                .Select(pizza => new PizzaDomainModel
+                {
+                    AverageSliceCount = pizza.AverageSliceCount,
+                    PizzaKind = pizza.PizzaKind,
+                    Size = pizza.Size
+                })
+                // filter pizzas that can be sold
+                .Where(pizza => pizza.IsSalable())
+                .ToList<IPizzaDomainModel>();
+
+            var pizzasLightDtos = pizzasDomainModels
+                .Select(pizza => new PizzaLightDto
+                {
+                    AverageSliceCount = pizza.AverageSliceCount,
+                    PizzaKind = pizza.PizzaKind
+                })
+                .ToList<IPizzaLightDto>();
+
+            return pizzasLightDtos;
+        }
     }
 }

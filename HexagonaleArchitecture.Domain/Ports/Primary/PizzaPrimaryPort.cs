@@ -1,4 +1,5 @@
-﻿using HexagonaleArchitecture.Domain.Enums;
+﻿using HexagonaleArchitecture.Domain.DTOs;
+using HexagonaleArchitecture.Domain.Enums;
 
 namespace HexagonaleArchitecture.Domain.Ports.Primary
 {
@@ -14,6 +15,19 @@ namespace HexagonaleArchitecture.Domain.Ports.Primary
         public int GetPizzaCount(uint personCount, PizzaKind pizzaKind)
         {
             return pizzaService.GetPizzaCount(personCount, pizzaKind);
+        }
+
+        public IList<IPizzaLightDto> GetPizzas()
+        {
+            var pizzas = pizzaService.GetPizzas();
+
+            return pizzas
+                .Select(pizza => new PizzaLightDto
+                {
+                    AverageSliceCount = pizza.AverageSliceCount,
+                    PizzaKind = pizza.PizzaKind
+                })
+                .ToList<IPizzaLightDto>();
         }
     }
 }

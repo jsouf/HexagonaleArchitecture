@@ -14,6 +14,10 @@ class Program
         var pizzaCalculator = new PizzaPrimaryPort(pizzaService);
         var consoleAdapter = new ConsolePrimaryAdapter(pizzaCalculator);
 
+        consoleAdapter.ShowAvailablePizzas();
+
+        Console.WriteLine();
+
         consoleAdapter.LaunchPizzaCalculation();
     }
 }

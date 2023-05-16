@@ -1,4 +1,6 @@
-﻿using HexagonaleArchitecture.Domain.Enums;
+﻿using HexagonaleArchitecture.ConsoleApp.Models;
+using HexagonaleArchitecture.Domain.DTOs;
+using HexagonaleArchitecture.Domain.Enums;
 using HexagonaleArchitecture.Domain.Ports.Primary;
 
 namespace HexagonaleArchitecture.ConsoleApp.Adapters
@@ -28,14 +30,18 @@ namespace HexagonaleArchitecture.ConsoleApp.Adapters
         {
             Console.WriteLine("Entrez le nombre de personnes: ?");
 
+#pragma warning disable CS8604 // Existence possible d'un argument de référence null.
             uint personCount = uint.Parse(Console.ReadLine());
+#pragma warning restore CS8604 // Existence possible d'un argument de référence null.
 
             Console.WriteLine(@"Entrez le type de pizza: 
             1-Vegetarian  
             2-Peperoni
             3-Regina");
 
+#pragma warning disable CS8604 // Existence possible d'un argument de référence null.
             int pizzaKindAsInt = int.Parse(Console.ReadLine());
+#pragma warning restore CS8604 // Existence possible d'un argument de référence null.
 
             var pizzaKind = pizzaKindAsInt switch
             {
@@ -48,6 +54,24 @@ namespace HexagonaleArchitecture.ConsoleApp.Adapters
             int pizzaCount = pizzaPrimaryPort.GetPizzaCount(personCount, pizzaKind);
 
             Console.WriteLine("Il faudra {0} pizza(s).", pizzaCount);
+        }
+
+        public void ShowAvailablePizzas()
+        {
+            IList<IPizzaLightDto> pizzasDTOs = pizzaPrimaryPort.GetPizzas();
+
+            // automapper
+            IEnumerable<PizzaAppModel> pizzas = pizzasDTOs.Select(pizza => new PizzaAppModel
+            {
+                AverageSliceCount = pizza.AverageSliceCount,
+                PizzaKind = pizza.PizzaKind
+            });
+
+            // listing pizzas in console
+            foreach (var pizza in pizzas)
+            {
+                Console.WriteLine($"pizza {pizza.PizzaKind} : {pizza.AverageSliceCount}");
+            }
         }
     }
 }
